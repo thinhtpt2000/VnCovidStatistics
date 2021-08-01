@@ -11,7 +11,6 @@ namespace VnCovidStatistics.Core.Services
     public class CityService : ICityService
     {
         private readonly IUnitOfWork _unitOfWork;
-
         public CityService(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
@@ -21,6 +20,12 @@ namespace VnCovidStatistics.Core.Services
         {
             var cities = _unitOfWork.CityRepository.GetAll().OrderBy(x => x.CityName);
             return cities;
+        }
+
+        public City GetCityByName(string cityName)
+        {
+            if (string.IsNullOrEmpty(cityName)) return null;
+            return _unitOfWork.CityRepository.GetCityByName(cityName);
         }
     }
 }

@@ -33,6 +33,7 @@ namespace VnCovidStatistics.Infrastructure.Extension
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ICityService, CityService>();
+            services.AddTransient<IStatisticService, StatisticService>();
             return services;
         }
     }

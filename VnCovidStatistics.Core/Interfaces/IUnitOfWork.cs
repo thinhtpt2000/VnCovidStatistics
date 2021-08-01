@@ -7,9 +7,9 @@ namespace VnCovidStatistics.Core.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         
-        IRepository<City> CityRepository { get; }
-        
-        IRepository<Statistic> StatisticRepository { get; }
+        ICityRepository CityRepository { get; }
+
+        IStatisticRepository StatisticRepository { get; }
         
         void SaveChanges();
 

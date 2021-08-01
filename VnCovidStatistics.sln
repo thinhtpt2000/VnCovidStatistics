@@ -1,10 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VnCovidStatistics.Core", "VnCovidStatistics.Core\VnCovidStatistics.Core.csproj", "{38BB1303-129E-41EB-9165-FC36B1C7F70F}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VnCovidStatistics.Core", "VnCovidStatistics.Core\VnCovidStatistics.Core.csproj", "{38BB1303-129E-41EB-9165-FC36B1C7F70F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VnCovidStatistics.Infrastructure", "VnCovidStatistics.Infrastructure\VnCovidStatistics.Infrastructure.csproj", "{B408676A-4A5F-478E-A0DE-969BE19455BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VnCovidStatistics.Infrastructure", "VnCovidStatistics.Infrastructure\VnCovidStatistics.Infrastructure.csproj", "{B408676A-4A5F-478E-A0DE-969BE19455BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VnCovidStatistics.API", "VnCovidStatistics.API\VnCovidStatistics.API.csproj", "{B214A612-3FBB-4073-9660-A8FA837B9B8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VnCovidStatistics.API", "VnCovidStatistics.API\VnCovidStatistics.API.csproj", "{B214A612-3FBB-4073-9660-A8FA837B9B8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VnCovidStatistics.Crawler", "VnCovidStatistics.Crawler\VnCovidStatistics.Crawler.csproj", "{37019C0E-A829-424E-BF17-7463ADDFEC49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +29,15 @@ Global
 		{B214A612-3FBB-4073-9660-A8FA837B9B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B214A612-3FBB-4073-9660-A8FA837B9B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B214A612-3FBB-4073-9660-A8FA837B9B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37019C0E-A829-424E-BF17-7463ADDFEC49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37019C0E-A829-424E-BF17-7463ADDFEC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37019C0E-A829-424E-BF17-7463ADDFEC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37019C0E-A829-424E-BF17-7463ADDFEC49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F32D6025-257E-4E03-998A-42296FBAD796}
 	EndGlobalSection
 EndGlobal

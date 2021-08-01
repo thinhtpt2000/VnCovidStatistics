@@ -10,6 +10,8 @@ namespace VnCovidStatistics.Infrastructure.Mapping
         {
             CreateMap<City, CityDto>();
             CreateMap<CityDto, City>();
+            CreateMap<Statistic, StatisticDto>();
+            CreateMap<StatisticDto, Statistic>();
         }
     }
 }
