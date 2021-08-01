@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Data" />
+      <Folder Include="Extension" />
+      <Folder Include="Filters" />
+      <Folder Include="Interfaces" />
+      <Folder Include="Mapping" />
+      <Folder Include="Repositories" />
+      <Folder Include="Services" />
+      <Folder Include="Validations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\VnCovidStatistics.Core\VnCovidStatistics.Core.csproj" />
+    </ItemGroup>
+
+</Project>
