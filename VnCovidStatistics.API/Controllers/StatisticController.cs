@@ -24,6 +24,15 @@ namespace VnCovidStatistics.API.Controllers
         }
 
         [HttpGet]
+        public IActionResult GetAllStatistics()
+        {
+            var statistic = _sattisticService.GetAll();
+            var statisticDto = _mapper.Map<IEnumerable<StatisticDto>>(statistic);
+            return Ok(statisticDto);
+        }
+
+        [HttpGet]
+        [Route("city")]
         public async Task<IActionResult> GetStatisticByCityIdAndDate(Guid cityId, DateTime date)
         {
             var statistic = await _sattisticService.GetStatisticByCityAndDate(cityId, date);

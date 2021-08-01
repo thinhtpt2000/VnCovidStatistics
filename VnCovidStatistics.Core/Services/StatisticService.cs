@@ -14,6 +14,11 @@ namespace VnCovidStatistics.Core.Services
             this._unitOfWork = unitOfWork;
         }
 
+        public IEnumerable<Statistic> GetAll()
+        {
+            return _unitOfWork.StatisticRepository.GetAll();
+        }
+
         public async Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime date)
         {
             return await _unitOfWork.StatisticRepository.GetStatisticByCityAndDate(cityId, date);
