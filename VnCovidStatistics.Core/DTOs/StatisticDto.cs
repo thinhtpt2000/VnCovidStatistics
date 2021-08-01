@@ -10,5 +10,6 @@ namespace VnCovidStatistics.Core.DTOs
         public int TodayCases { get; set; }
         public DateTime LastUpdated { get; set; }
         public Guid CityId { get; set; }
+        public CityDto City { get; set; }
     }
 }

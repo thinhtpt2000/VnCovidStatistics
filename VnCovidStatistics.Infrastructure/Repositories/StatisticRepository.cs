@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VnCovidStatistics.Core.Entities;
 using VnCovidStatistics.Core.Interfaces;
@@ -17,6 +18,10 @@ namespace VnCovidStatistics.Infrastructure.Repositories
         {
             return await _entities.FirstOrDefaultAsync(x => x.CityId == cityId 
                                                 && x.LastUpdated.Date.CompareTo(date.Date) == 0);
+        }
+
+        public override IEnumerable<Statistic> GetAll() {
+            return _entities.Include(x => x.City);
         }
     }
 }

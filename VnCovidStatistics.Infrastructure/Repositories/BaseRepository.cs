@@ -21,7 +21,7 @@ namespace VnCovidStatistics.Infrastructure.Repositories
             _entities = _context.Set<T>();
         }
         
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _entities.AsEnumerable();
         }
