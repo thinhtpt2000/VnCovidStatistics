@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using VnCovidStatistics.Core.Interfaces;
 using VnCovidStatistics.Infrastructure.Data;
+using VnCovidStatistics.Infrastructure.Repositories;
 
 namespace VnCovidStatistics.Infrastructure.Extension
 {
@@ -22,6 +24,13 @@ namespace VnCovidStatistics.Infrastructure.Extension
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VnCovidStatistics.API", Version = "v1" });
             });
+            return services;
+        }
+
+        public static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
