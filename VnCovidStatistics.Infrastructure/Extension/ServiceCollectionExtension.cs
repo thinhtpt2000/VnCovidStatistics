@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using VnCovidStatistics.Core.Interfaces;
+using VnCovidStatistics.Core.Services;
 using VnCovidStatistics.Infrastructure.Data;
 using VnCovidStatistics.Infrastructure.Repositories;
 
@@ -31,6 +32,7 @@ namespace VnCovidStatistics.Infrastructure.Extension
         {
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ICityService, CityService>();
             return services;
         }
     }
