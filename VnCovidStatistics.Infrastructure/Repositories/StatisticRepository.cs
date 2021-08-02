@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VnCovidStatistics.Core.Entities;
 using VnCovidStatistics.Core.Interfaces;
@@ -21,7 +22,11 @@ namespace VnCovidStatistics.Infrastructure.Repositories
         }
 
         public override IEnumerable<Statistic> GetAll() {
-            return _entities.Include(x => x.City);
+            return _entities.Include(x => x.City).OrderByDescending(x => x.LastUpdated)
+                                                .ThenByDescending(x => x.TotalCases)
+                                                .ThenByDescending(x => x.TodayCases)
+                                                .ThenByDescending(x => x.TotalDeaths)
+                                                .ThenBy(x => x.City.CityName);
         }
     }
 }

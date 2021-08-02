@@ -14,28 +14,35 @@ namespace VnCovidStatistics.API.Controllers
     [ApiController]
     public class StatisticController : ControllerBase
     {
-        private readonly IStatisticService _sattisticService;
+        private readonly IStatisticService _statisticService;
         private readonly IMapper _mapper;
 
         public StatisticController(IStatisticService statisticService, IMapper mapper)
         {
-            _sattisticService = statisticService;
+            _statisticService = statisticService;
             _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetAllStatistics()
         {
-            var statistic = _sattisticService.GetAll();
+            var statistic = _statisticService.GetAll();
             var statisticDto = _mapper.Map<IEnumerable<StatisticDto>>(statistic);
-            return Ok(statisticDto);
+            var statisticsResponse = new List<StatisticResponseDto>();
+            foreach (var item in statisticDto)
+            {
+                var responseDto = _mapper.Map<StatisticResponseDto>(item);
+                responseDto.CityName = item.City.CityName;
+                statisticsResponse.Add(responseDto);
+            }
+            return Ok(statisticsResponse);
         }
 
         [HttpGet]
         [Route("city")]
         public async Task<IActionResult> GetStatisticByCityIdAndDate(Guid cityId, DateTime date)
         {
-            var statistic = await _sattisticService.GetStatisticByCityAndDate(cityId, date);
+            var statistic = await _statisticService.GetStatisticByCityAndDate(cityId, date);
             var statisticDto = _mapper.Map<StatisticDto>(statistic);
             return Ok(statisticDto);
         }
