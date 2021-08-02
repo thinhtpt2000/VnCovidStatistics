@@ -12,6 +12,7 @@ namespace VnCovidStatistics.Infrastructure.Mapping
             CreateMap<CityDto, City>();
             CreateMap<Statistic, StatisticDto>();
             CreateMap<StatisticDto, Statistic>();
+            CreateMap<StatisticCrawlerDto, StatisticDto>().ReverseMap();
         }
     }
 }
