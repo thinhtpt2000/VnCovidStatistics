@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using VnCovidStatistics.API.Responses;
 using VnCovidStatistics.Core.DTOs;
 using VnCovidStatistics.Core.Interfaces;
+using VnCovidStatistics.Core.QueryFilters;
 
 namespace VnCovidStatistics.API.Controllers
 {
@@ -25,11 +26,23 @@ namespace VnCovidStatistics.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllStatistics()
+        public IActionResult GetAllStatistics([FromQuery] PageFilter filters)
         {
-            var statistic = _statisticService.GetAll();
+            var statistic = _statisticService.GetAll(filters);
             var statisticDto = _mapper.Map<IEnumerable<StatisticResponseDto>>(statistic);
-            var response = new ApiResponse<IEnumerable<StatisticResponseDto>>(statisticDto);
+            var metaData = new MetaData
+            {
+                TotalCount = statistic.TotalCount,
+                PageSize = statistic.PageSize,
+                CurrentPage = statistic.CurrentPage,
+                TotalPages = statistic.TotalPages,
+                HasNextPage = statistic.HasNextPage,
+                HasPreviousPage = statistic.HasPreviousPage,
+            };
+            var response = new ApiResponse<IEnumerable<StatisticResponseDto>>(statisticDto)
+            {
+                meta = metaData
+            };
             return Ok(response);
         }
 

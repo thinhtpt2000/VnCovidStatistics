@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using VnCovidStatistics.Core.Interfaces;
+using VnCovidStatistics.Core.Options;
 using VnCovidStatistics.Core.Services;
 using VnCovidStatistics.Infrastructure.Data;
 using VnCovidStatistics.Infrastructure.Repositories;
@@ -34,6 +35,12 @@ namespace VnCovidStatistics.Infrastructure.Extension
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IStatisticService, StatisticService>();
+            return services;
+        }
+        
+        public static IServiceCollection AddOptionsModule(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<PaginationOptions>(configuration.GetSection("Pagination"));
             return services;
         }
     }

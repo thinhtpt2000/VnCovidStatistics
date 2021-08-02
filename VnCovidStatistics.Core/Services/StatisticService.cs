@@ -1,22 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using VnCovidStatistics.Core.CustomEntities;
 using VnCovidStatistics.Core.Entities;
 using VnCovidStatistics.Core.Interfaces;
+using VnCovidStatistics.Core.Options;
+using VnCovidStatistics.Core.QueryFilters;
 
 namespace VnCovidStatistics.Core.Services
 {
     public class StatisticService : IStatisticService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public StatisticService(IUnitOfWork unitOfWork)
+        private readonly PaginationOptions _paginationOptions;
+        public StatisticService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
+            _paginationOptions = options.Value;
         }
 
-        public IEnumerable<Statistic> GetAll()
+        public PagedList<Statistic> GetAll(PageFilter filters)
         {
-            return _unitOfWork.StatisticRepository.GetAll();
+            // Do paging
+            filters.PageNumber = filters.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filters.PageNumber;
+            filters.PageSize = filters.PageSize == 0 ? _paginationOptions.DefaultPageSize : filters.PageSize;
+            var statistics = _unitOfWork.StatisticRepository.GetAll();
+            var pagedStatistics = PagedList<Statistic>.Create(statistics, filters.PageNumber, filters.PageSize);
+            return pagedStatistics;
         }
 
         public async Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime date)

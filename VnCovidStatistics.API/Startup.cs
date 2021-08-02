@@ -21,6 +21,7 @@ namespace VnCovidStatistics.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddOptionsModule(Configuration);
             services.AddControllers();
             services.AddDbContexts(Configuration);
             services.AddSwagger();

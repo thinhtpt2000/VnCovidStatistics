@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using VnCovidStatistics.API.Responses;
 using VnCovidStatistics.Core.DTOs;
 using VnCovidStatistics.Core.Interfaces;
+using VnCovidStatistics.Core.QueryFilters;
 
 namespace VnCovidStatistics.API.Controllers
 {
@@ -21,11 +22,23 @@ namespace VnCovidStatistics.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCities()
+        public IActionResult GetCities([FromQuery] PageFilter filters)
         {
-            var cities = _cityService.GetCities();
+            var cities = _cityService.GetCities(filters);
             var citesDto = _mapper.Map<IEnumerable<CityDto>>(cities);
-            var response = new ApiResponse<IEnumerable<CityDto>>(citesDto);
+            var metaData = new MetaData
+            {
+                TotalCount = cities.TotalCount,
+                PageSize = cities.PageSize,
+                CurrentPage = cities.CurrentPage,
+                TotalPages = cities.TotalPages,
+                HasNextPage = cities.HasNextPage,
+                HasPreviousPage = cities.HasPreviousPage,
+            };
+            var response = new ApiResponse<IEnumerable<CityDto>>(citesDto)
+            {
+                meta = metaData
+            };
             return Ok(response);
         }
     }

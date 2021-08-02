@@ -1,4 +1,6 @@
-﻿namespace VnCovidStatistics.API.Responses
+﻿using VnCovidStatistics.Core.QueryFilters;
+
+namespace VnCovidStatistics.API.Responses
 {
     public class ApiResponse<T>
     {
@@ -8,6 +10,6 @@
         }
         
         public T Data { get; set; }
-        
+        public MetaData meta { get; set; }
     }
 }
