@@ -10,7 +10,7 @@ namespace VnCovidStatistics.Core.Interfaces
     public interface IStatisticService
     {
         PagedList<Statistic> GetAll(PageFilter filters);
-        Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime date);
+        Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime? date);
         Task InsertOrUpdateStatistics(IEnumerable<Statistic> statistics);
     }
 }

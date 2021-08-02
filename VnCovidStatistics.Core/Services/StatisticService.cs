@@ -30,9 +30,9 @@ namespace VnCovidStatistics.Core.Services
             return pagedStatistics;
         }
 
-        public async Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime date)
+        public async Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime? date)
         {
-            return await _unitOfWork.StatisticRepository.GetStatisticByCityAndDate(cityId, date);
+            return await _unitOfWork.StatisticRepository.GetStatisticByCityAndDate(cityId, date ?? DateTime.Now);
         }
 
         public async Task InsertOrUpdateStatistics(IEnumerable<Statistic> statistics)

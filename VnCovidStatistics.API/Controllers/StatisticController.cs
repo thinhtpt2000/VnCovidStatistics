@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using VnCovidStatistics.API.Responses;
@@ -48,7 +49,7 @@ namespace VnCovidStatistics.API.Controllers
 
         [HttpGet]
         [Route("city")]
-        public async Task<IActionResult> GetStatisticByCityIdAndDate(Guid cityId, DateTime date)
+        public async Task<IActionResult> GetStatisticByCityIdAndDate([Required] Guid cityId, DateTime? date)
         {
             var statistic = await _statisticService.GetStatisticByCityAndDate(cityId, date);
             var statisticDto = _mapper.Map<StatisticResponseDto>(statistic);
