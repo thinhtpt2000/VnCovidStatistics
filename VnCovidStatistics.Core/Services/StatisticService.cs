@@ -24,7 +24,7 @@ namespace VnCovidStatistics.Core.Services
             return await _unitOfWork.StatisticRepository.GetStatisticByCityAndDate(cityId, date);
         }
 
-        public async Task InsertOrUpdateStatistics(List<Statistic> statistics)
+        public async Task InsertOrUpdateStatistics(IEnumerable<Statistic> statistics)
         {
             foreach (var statistic in statistics)
             {

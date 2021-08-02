@@ -17,8 +17,9 @@ namespace VnCovidStatistics.Infrastructure.Repositories
 
         public async Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime date)
         {
-            return await _entities.FirstOrDefaultAsync(x => x.CityId == cityId 
-                                                && x.LastUpdated.Date.CompareTo(date.Date) == 0);
+            return await _entities.Include(x => x.City)
+                                    .FirstOrDefaultAsync(x => x.CityId == cityId 
+                                                            && x.LastUpdated.Date.CompareTo(date.Date) == 0);
         }
 
         public override IEnumerable<Statistic> GetAll() {

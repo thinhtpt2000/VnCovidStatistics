@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VnCovidStatistics.API.Responses;
 using VnCovidStatistics.Core.DTOs;
 using VnCovidStatistics.Core.Interfaces;
 
@@ -27,15 +28,9 @@ namespace VnCovidStatistics.API.Controllers
         public IActionResult GetAllStatistics()
         {
             var statistic = _statisticService.GetAll();
-            var statisticDto = _mapper.Map<IEnumerable<StatisticDto>>(statistic);
-            var statisticsResponse = new List<StatisticResponseDto>();
-            foreach (var item in statisticDto)
-            {
-                var responseDto = _mapper.Map<StatisticResponseDto>(item);
-                responseDto.CityName = item.City.CityName;
-                statisticsResponse.Add(responseDto);
-            }
-            return Ok(statisticsResponse);
+            var statisticDto = _mapper.Map<IEnumerable<StatisticResponseDto>>(statistic);
+            var response = new ApiResponse<IEnumerable<StatisticResponseDto>>(statisticDto);
+            return Ok(response);
         }
 
         [HttpGet]
@@ -43,8 +38,9 @@ namespace VnCovidStatistics.API.Controllers
         public async Task<IActionResult> GetStatisticByCityIdAndDate(Guid cityId, DateTime date)
         {
             var statistic = await _statisticService.GetStatisticByCityAndDate(cityId, date);
-            var statisticDto = _mapper.Map<StatisticDto>(statistic);
-            return Ok(statisticDto);
+            var statisticDto = _mapper.Map<StatisticResponseDto>(statistic);
+            var response = new ApiResponse<StatisticResponseDto>(statisticDto);
+            return Ok(response);
         }
     }
 }

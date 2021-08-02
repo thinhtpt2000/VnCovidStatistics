@@ -9,6 +9,6 @@ namespace VnCovidStatistics.Core.Interfaces
     {
         IEnumerable<Statistic> GetAll();
         Task<Statistic> GetStatisticByCityAndDate(Guid cityId, DateTime date);
-        Task InsertOrUpdateStatistics(List<Statistic> statistics);
+        Task InsertOrUpdateStatistics(IEnumerable<Statistic> statistics);
     }
 }
